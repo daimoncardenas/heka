@@ -4,6 +4,7 @@ import { UpdateAuthDto } from './dto/update-auth.dto';
 import { PrismaService } from 'src/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { ResponseAuthDto } from './dto/response-auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(authDto: AuthDto) {
+  async login(authDto: AuthDto): Promise<ResponseAuthDto> {
     try {
       const { email, password } = authDto;
       const user = await this.prisma.user.findUnique({

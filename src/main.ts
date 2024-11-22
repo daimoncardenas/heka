@@ -14,7 +14,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('API Heka Testing') //? Tittle
+    .setTitle('API HEKA TESTING') //? Tittle
     .setDescription('Endpoints de la API HEKA') //? Description
     .setVersion('1.0') //? Version
     .addBearerAuth() //? Autentications with Bearer
