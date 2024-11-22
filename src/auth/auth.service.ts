@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   findAll() {
-    return `This action returns all auth`;
+    return `It´s necessary login to access this route`;
   }
 
   findOne(id: number) {
