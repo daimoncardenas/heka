@@ -109,6 +109,9 @@ export class UsersService {
         where: {
           id,
         },
+        include:{
+          Product:true
+        }
       });
 
       if (!user) {

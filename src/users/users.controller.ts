@@ -61,7 +61,7 @@ export class UsersController {
     description: 'User found',
     type: Users,
   })
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string): Promise<Users> {
     return await this.usersService.findOne(id);
   }
 
@@ -75,7 +75,7 @@ export class UsersController {
     description: 'User updated successfully.',
     type: Users,
   })
-  async update(@Body() updateUserDto: UpdateUserDto) {
+  async update(@Body() updateUserDto: UpdateUserDto): Promise<Users> {
     return this.usersService.update(updateUserDto);
   }
 

@@ -23,12 +23,12 @@ import { ApiProperty } from '@nestjs/swagger';
     @IsOptional()
     search?: string;
   
-    @ApiProperty({ example: '12-11-24', description: 'Start date', required: false })
+    @ApiProperty({ example: '2023-11-17', description: 'Start date', required: false })
     @IsString()
     @IsOptional()
     start?: string;
   
-    @ApiProperty({ example: '23-11-24', description: 'End date', required: false })
+    @ApiProperty({ example: '2024-11-22', description: 'End date', required: false })
     @IsString()
     @IsOptional()
     end?: string;
