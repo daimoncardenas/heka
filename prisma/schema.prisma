@@ -18,7 +18,7 @@ model User {
   name      String
   email     String    @unique
   password  String
-  status    STATUS
+  status    String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Product   Product[]
@@ -31,12 +31,9 @@ model Product {
   userId      String   @map("user_id") @db.ObjectId
   user        User     @relation(fields: [userId], references: [id])
   price       BigInt
-  status      STATUS
+  status      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
-enum STATUS {
-  ACTIVE
-  INACTIVE
-}
+

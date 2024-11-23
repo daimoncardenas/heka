@@ -1,7 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthDto } from './dto/auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { ResponseAuthDto } from './dto/response-auth.dto';
@@ -14,7 +13,6 @@ export class AuthService {
   ) {}
 
   async login(authDto: AuthDto): Promise<ResponseAuthDto> {
-    try {
       const { email, password } = authDto;
       const user = await this.prisma.user.findUnique({
         where: { email },
@@ -27,27 +25,7 @@ export class AuthService {
       const token = this.jwtService.sign({ sub: user.id });
 
       return { token };
-    } catch (e) {
-      console.log(e);
-      return e;
-    } finally {
-      await this.prisma.$disconnect();
-    }
+   
   }
 
-  findAll() {
-    return `It´s necessary login to access this route`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
-  }
 }

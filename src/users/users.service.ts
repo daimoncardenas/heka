@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { PrismaService } from 'src/prisma.service';
-import { STATUS } from 'src/common';
+import { PrismaService } from '../prisma.service';
+import { STATUS } from '../common';
 import * as bcrypt from 'bcrypt';
 import { Users } from './dto/users.dto';
 import { FindAllUserInputDto } from './dto/input-find-all-user.dto';
@@ -159,8 +159,5 @@ export class UsersService {
   }
 
 
-/* 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  } */
+
 }

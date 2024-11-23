@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { FindAllProductInputDto } from './dto/input-find-all-product.dto';
 import { FindAllProductResponseDto } from './dto/response-find-all-products.dto';
-import { STATUS } from '@prisma/client';
 import { Products } from './dto/products.dto';
 import {
   ProductCreateError,
   ProductNotFoundError,
   ProductUpdateError,
 } from './errors/productsErrors';
+import { STATUS } from '../common';
+
 
 @Injectable()
 export class ProductsService {

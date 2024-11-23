@@ -2,9 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { PrismaService } from './prisma.service';
 
 async function bootstrap() {
+
   const app = await NestFactory.create(AppModule);
+
+  //? Global Pipes
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -12,6 +17,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  //? Configuration of Swagger
 
   const config = new DocumentBuilder()
     .setTitle('API HEKA TESTING') //? Tittle
@@ -22,6 +29,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
+
 
 
   await app.listen(3000);

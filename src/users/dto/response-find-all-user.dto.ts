@@ -1,4 +1,4 @@
-import { GeneralResponseQueriesFindAllDto } from 'src/common';
+import { GeneralResponseQueriesFindAllDto } from '../../common';
 import { Users } from './users.dto';
 import { ApiProperty } from '@nestjs/swagger';
 

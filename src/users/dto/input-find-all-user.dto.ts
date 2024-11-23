@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { GeneralInputQueriesFindAllDto, STATUS } from 'src/common';
+import { IsEnum, IsOptional } from 'class-validator';
+import { GeneralInputQueriesFindAllDto, STATUS } from '../../common';
 
 export class FindAllUserInputDto extends GeneralInputQueriesFindAllDto {
 
