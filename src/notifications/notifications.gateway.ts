@@ -10,8 +10,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway(3001, {
-  transports: ['websocket'],
+@WebSocketGateway({
   cors: {
     origin: '*', // Configura los orígenes permitidos según tus necesidades
   },
