@@ -12,7 +12,7 @@ export class CreateProductDto {
   @IsOptional()
   description: string;
 
-  @ApiProperty({ example: 1000, description: 'Product Price' })
+  @ApiProperty({ example: "1000", description: 'Product Price' })
   @IsString()
   price: bigint
 }
