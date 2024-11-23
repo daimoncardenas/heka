@@ -23,20 +23,21 @@ export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisco
 
 
   handleConnection(client: Socket) {
-    console.log(`Cliente conectado: ${client.id}`);
+    console.log(`Client connected: ${client.id}`);
   }
 
   handleDisconnect(client: Socket) {
-    console.log(`Cliente desconectado: ${client.id}`);
+    console.log(`Client disconnected: ${client.id}`);
   }
 
   @SubscribeMessage('message')
   handleMessage(@ConnectedSocket() client: Socket, @MessageBody() payload: string) {
-    console.log(`Mensaje recibido: ${payload}`);
+    console.log(`Message received: ${payload}`);
   }
 
   
-/*   sendProductCreatedNotification(product: any) {
+  sendProductCreatedNotification(product: any) {
+    console.log('Emitting productCreated event');
     this.server.emit('productCreated', product);
-  } */
+  }
 }

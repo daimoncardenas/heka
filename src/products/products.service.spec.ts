@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsService } from './products.service';
 import { PrismaService } from '../prisma.service';
 import { STATUS } from '../common';
+import { NotificationsGateway } from '../notifications/notifications.gateway';
+
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -20,10 +22,21 @@ describe('ProductsService', () => {
       },
       $disconnect: jest.fn(),
     } as unknown as jest.Mocked<PrismaService>;
+    
+
+    const mockNotificationsGateway = {
+      handleMessage: jest.fn(),
+      sendProductCreatedNotification: jest.fn(), // Mock the method
+    };
+
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ProductsService,
+        {
+          provide: NotificationsGateway,
+          useValue: mockNotificationsGateway
+        },
         {
           provide: PrismaService,
           useValue: mockPrismaService,

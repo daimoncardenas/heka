@@ -11,7 +11,7 @@ import {
   ProductUpdateError,
 } from './errors/productsErrors';
 import { STATUS } from '../common';
-import { NotificationsGateway } from 'src/notifications/notifications.gateway';
+import { NotificationsGateway } from '../notifications/notifications.gateway';
 
 @Injectable()
 export class ProductsService {
@@ -42,11 +42,11 @@ export class ProductsService {
       }
 
       //? Emit notification to all users about the new product
-      /* this.notificationsGateway.sendProductCreatedNotification({
+      this.notificationsGateway.sendProductCreatedNotification({
         id: product.id,
         name: product.name,
         price: product.price.toString(),
-      }); */
+      });
 
       return {
         ...product,
