@@ -1,34 +1,42 @@
-import { WebSocketGateway, SubscribeMessage, MessageBody } from '@nestjs/websockets';
-import { NotificationsService } from './notifications.service';
-import { CreateNotificationDto } from './dto/create-notification.dto';
-import { UpdateNotificationDto } from './dto/update-notification.dto';
+import {
+  WebSocketGateway,
+  WebSocketServer,
+  OnGatewayInit,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  SubscribeMessage,
+  ConnectedSocket,
+  MessageBody,
+} from '@nestjs/websockets';
+import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway()
-export class NotificationsGateway {
-  constructor(private readonly notificationsService: NotificationsService) {}
+@WebSocketGateway(3001, {
+  transports: ['websocket'],
+  cors: {
+    origin: '*', // Configura los orígenes permitidos según tus necesidades
+  },
+})
+export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisconnect
+{
+  @WebSocketServer() 
+  server: Server;
 
-  @SubscribeMessage('createNotification')
-  create(@MessageBody() createNotificationDto: CreateNotificationDto) {
-    return this.notificationsService.create(createNotificationDto);
+
+  handleConnection(client: Socket) {
+    console.log(`Cliente conectado: ${client.id}`);
   }
 
-  @SubscribeMessage('findAllNotifications')
-  findAll() {
-    return this.notificationsService.findAll();
+  handleDisconnect(client: Socket) {
+    console.log(`Cliente desconectado: ${client.id}`);
   }
 
-  @SubscribeMessage('findOneNotification')
-  findOne(@MessageBody() id: number) {
-    return this.notificationsService.findOne(id);
+  @SubscribeMessage('message')
+  handleMessage(@ConnectedSocket() client: Socket, @MessageBody() payload: string) {
+    console.log(`Mensaje recibido: ${payload}`);
   }
 
-  @SubscribeMessage('updateNotification')
-  update(@MessageBody() updateNotificationDto: UpdateNotificationDto) {
-    return this.notificationsService.update(updateNotificationDto.id, updateNotificationDto);
-  }
-
-  @SubscribeMessage('removeNotification')
-  remove(@MessageBody() id: number) {
-    return this.notificationsService.remove(id);
-  }
+  
+/*   sendProductCreatedNotification(product: any) {
+    this.server.emit('productCreated', product);
+  } */
 }

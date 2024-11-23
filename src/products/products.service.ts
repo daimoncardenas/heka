@@ -11,11 +11,14 @@ import {
   ProductUpdateError,
 } from './errors/productsErrors';
 import { STATUS } from '../common';
-
+import { NotificationsGateway } from 'src/notifications/notifications.gateway';
 
 @Injectable()
 export class ProductsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private notificationsGateway: NotificationsGateway,
+  ) {}
 
   //? Create a new product
 
@@ -37,6 +40,14 @@ export class ProductsService {
       if (!product) {
         throw new ProductCreateError('Product error to create');
       }
+
+      //? Emit notification to all users about the new product
+      /* this.notificationsGateway.sendProductCreatedNotification({
+        id: product.id,
+        name: product.name,
+        price: product.price.toString(),
+      }); */
+
       return {
         ...product,
         price: product.price.toString(),
@@ -123,9 +134,9 @@ export class ProductsService {
         where: {
           id: id,
         },
-        include:{
-          user:true
-        }
+        include: {
+          user: true,
+        },
       });
 
       console.log('productFindOne', product);

@@ -19,7 +19,6 @@ import { Users } from './dto/users.dto';
 
 @Controller('users')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('jwt'))
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -40,6 +39,7 @@ export class UsersController {
   //? Find all users
 
   @Get('find-all')
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Find all users' })
   @ApiResponse({
     status: 200,
@@ -55,6 +55,7 @@ export class UsersController {
   //? Find one user
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Find one user' })
   @ApiResponse({
     status: 200,
@@ -68,6 +69,7 @@ export class UsersController {
   //? Update a user
 
   @Patch()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Update a user' })
   @ApiBody({ type: UpdateUserDto })
   @ApiResponse({
