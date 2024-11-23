@@ -93,8 +93,5 @@ export class ProductsController {
     return await this.productsService.update(updateProductDto);
   }
 
-  /* @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(+id);
-  } */
+
 }
