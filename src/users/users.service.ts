@@ -7,7 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { Users } from './dto/users.dto';
 import { FindAllUserInputDto } from './dto/input-find-all-user.dto';
 import { FindAllUserResponseDto } from './dto/response-find-all-user.dto';
-import { UserCreateError, UserNotFoundError, UserUpdateError } from './errors/usersErrors';
+import { UserAlreadyExist, UserNotFoundError, UserUpdateError } from './errors/usersErrors';
 
 @Injectable()
 export class UsersService {
@@ -20,6 +20,17 @@ export class UsersService {
       //? Hash password
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
 
+      const userExist = await this.prisma.user.findFirst({
+        where: {
+          email: createUserDto.email,
+        },
+      });
+
+      if (userExist) {
+        throw new UserAlreadyExist('User already exist');
+      }
+
+
       const user = await this.prisma.user.create({
         data: {
           email: createUserDto.email,
@@ -29,9 +40,6 @@ export class UsersService {
         },
       });
 
-      if (!user) {
-        throw new UserCreateError('User error to create');
-      }
 
       return user;
     } catch (e) {

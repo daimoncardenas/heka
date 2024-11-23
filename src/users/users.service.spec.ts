@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { PrismaService } from '../prisma.service';
 import { STATUS } from '../common';
 import * as bcrypt from 'bcrypt';
-import { UserCreateError, UserNotFoundError, UserUpdateError } from './errors/usersErrors';
+
 
 describe('UsersService', () => {
   let service: UsersService;

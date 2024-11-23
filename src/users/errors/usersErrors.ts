@@ -21,11 +21,11 @@ export class UserUpdateError extends SystemError {
 }
 
 
-export class UserCreateError extends SystemError {
+export class UserAlreadyExist extends SystemError {
   constructor(attribute: string) {
-    super(`User with this attribute ${attribute} error to create`);
-    this.code = 'user/create-error';
-    this.name = 'UserCreateError';
+    super(`User with this attribute ${attribute} already exist`);
+    this.code = 'user/already-exist';
+    this.name = 'UserAlreadyExist';
     this.kind = KindError.NOINFO;
   }
 }
