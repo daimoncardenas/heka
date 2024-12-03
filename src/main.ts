@@ -23,7 +23,7 @@ async function bootstrap() {
   //? Configuration of Swagger
 
   const config = new DocumentBuilder()
-    .setTitle('API HEKA TESTING') //? Tittle
+    .setTitle('API TESTING') //? Tittle
     .setDescription('Elaborado por Daimon Cardenas') //? Description
     .setVersion('1.0') //? Version
     .addBearerAuth() //? Autentications with Bearer
